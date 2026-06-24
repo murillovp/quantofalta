@@ -1,0 +1,624 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Outfit", system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 1.2s ease, color 1.2s ease;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--bg);
+}
+
+/* ---- Ambient overlay ---- */
+
+#ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+/* ---- Main layout ---- */
+
+main {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 480px;
+  opacity: 0;
+  animation: fade-in 1s ease 0.3s forwards;
+}
+
+/* ---- Countdown: days ---- */
+
+.days {
+  margin-bottom: 1rem;
+}
+
+.days-number {
+  display: block;
+  font-size: 8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  transition: color 1.2s ease;
+  letter-spacing: -0.03em;
+}
+
+.days-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 200;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--text-soft);
+  transition: color 1.2s ease;
+  margin-top: 0.25rem;
+}
+
+/* ---- Countdown: time ---- */
+
+.time {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.time-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 3rem;
+}
+
+.time-number {
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  transition: color 1.2s ease;
+}
+
+.time-sep {
+  font-size: 2rem;
+  font-weight: 200;
+  color: var(--text-soft);
+  transition: color 1.2s ease;
+  align-self: flex-start;
+  line-height: 1.1;
+}
+
+.time-label {
+  font-size: 0.6875rem;
+  font-weight: 200;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-soft);
+  transition: color 1.2s ease;
+  margin-top: 0.15rem;
+}
+
+/* ---- Divider ---- */
+
+.divider {
+  width: 40px;
+  height: 1px;
+  background: var(--divider);
+  margin: 2rem auto;
+  transition: background 1.2s ease, box-shadow 1.2s ease;
+}
+
+.tema-saudade .divider,
+.tema-sonhador .divider,
+.tema-animado .divider {
+  box-shadow: 0 0 10px var(--divider);
+}
+
+/* ---- Phrase section ---- */
+
+.phrase-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.phrase-text {
+  font-family: "Crimson Pro", Georgia, serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+  transition: color 1.2s ease;
+}
+
+.phrase-text.reunion {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+#frase {
+  display: inline-block;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dice {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-soft);
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: transform 0.2s ease, color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dice:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+.dice:active {
+  transform: scale(0.9);
+}
+
+.dice svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.dice.spin svg {
+  animation: dice-spin 0.5s ease;
+}
+
+/* ---- Admin panel ---- */
+
+.admin {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-alt);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 1.25rem 1.5rem 1.5rem;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background 1.2s ease;
+  z-index: 100;
+  border-top: 1px solid var(--divider);
+}
+
+.admin.open {
+  transform: translateY(0);
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.admin-title {
+  font-size: 0.75rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-soft);
+}
+
+.admin-close {
+  background: none;
+  border: none;
+  color: var(--text-soft);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.admin-themes {
+  display: flex;
+  gap: 0.25rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.admin-theme {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0.5rem;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.admin-theme:hover {
+  background: var(--divider);
+}
+
+.admin-swatch {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.admin-theme.active .admin-swatch {
+  border-color: var(--text);
+  transform: scale(1.15);
+}
+
+.admin-label {
+  font-size: 0.5625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+  transition: color 1.2s ease;
+}
+
+.admin-auto {
+  display: block;
+  width: 100%;
+  padding: 0.6rem;
+  background: var(--divider);
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.admin-auto:hover {
+  color: var(--text);
+}
+
+.admin-auto.active {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ---- Admin trigger ---- */
+
+.admin-trigger {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.5rem;
+  height: 0.25rem;
+  background: var(--divider);
+  border: none;
+  border-radius: 2px 2px 0 0;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+  z-index: 99;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.admin-trigger:hover {
+  opacity: 0.7;
+}
+
+.admin.open ~ .admin-trigger {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ================================
+   THEMES
+   ================================ */
+
+.tema-feliz {
+  --bg: #FFF8E7;
+  --bg-alt: rgba(255, 240, 204, 0.85);
+  --text: #2D1B00;
+  --text-soft: #8B6914;
+  --accent: #E85D04;
+  --accent-soft: #FFD166;
+  --divider: rgba(45, 27, 0, 0.12);
+}
+
+.tema-saudade {
+  --bg: #151627;
+  --bg-alt: rgba(28, 29, 53, 0.85);
+  --text: #C8D6E5;
+  --text-soft: #7B8FA8;
+  --accent: #6B9AC4;
+  --accent-soft: #4A6FA5;
+  --divider: rgba(200, 214, 229, 0.12);
+}
+
+.tema-sonhador {
+  --bg: #0F0E24;
+  --bg-alt: rgba(23, 21, 56, 0.85);
+  --text: #DDD5EC;
+  --text-soft: #9E91B7;
+  --accent: #C5B3E3;
+  --accent-soft: #8B6FC0;
+  --divider: rgba(221, 213, 236, 0.12);
+}
+
+.tema-animado {
+  --bg: #170A2E;
+  --bg-alt: rgba(34, 19, 66, 0.85);
+  --text: #F0E0FF;
+  --text-soft: #B388FF;
+  --accent: #FF2E63;
+  --accent-soft: #00D4AA;
+  --divider: rgba(240, 224, 255, 0.12);
+}
+
+.tema-romantico {
+  --bg: #FFF0F3;
+  --bg-alt: rgba(255, 224, 230, 0.85);
+  --text: #4A0E23;
+  --text-soft: #9D1D53;
+  --accent: #BE185D;
+  --accent-soft: #FB7185;
+  --divider: rgba(74, 14, 35, 0.1);
+}
+
+.tema-sereno {
+  --bg: #F0F7F4;
+  --bg-alt: rgba(220, 240, 230, 0.85);
+  --text: #1B3A2A;
+  --text-soft: #3D7A5A;
+  --accent: #1B7A4A;
+  --accent-soft: #6BC4A6;
+  --divider: rgba(27, 58, 42, 0.1);
+}
+
+.tema-nostalgico {
+  --bg: #F5E6D0;
+  --bg-alt: rgba(235, 218, 192, 0.85);
+  --text: #3E2C1C;
+  --text-soft: #7A5C34;
+  --accent: #8B6914;
+  --accent-soft: #C4956A;
+  --divider: rgba(62, 44, 28, 0.12);
+}
+
+/* ---- Theme ambient effects (CSS) ---- */
+
+.tema-feliz #ambient {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 209, 102, 0.15),
+    rgba(232, 93, 4, 0.05),
+    rgba(255, 248, 231, 0)
+  );
+  background-size: 300% 300%;
+  animation: gradient-drift 20s ease infinite;
+}
+
+.tema-animado .days-number {
+  text-shadow: 0 0 30px rgba(255, 46, 99, 0.3),
+    0 0 60px rgba(255, 46, 99, 0.15);
+  animation: glow-pulse 2.5s ease-in-out infinite;
+}
+
+.tema-romantico #ambient {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(190, 24, 93, 0.04) 100%
+  );
+}
+
+.tema-sereno #ambient {
+  background: linear-gradient(
+    160deg,
+    rgba(107, 196, 166, 0.06),
+    rgba(27, 122, 74, 0.03),
+    rgba(107, 196, 166, 0.06)
+  );
+  background-size: 300% 300%;
+  animation: gradient-drift 25s ease infinite;
+}
+
+.tema-nostalgico #ambient::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  opacity: 0.035;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* ---- Rain drops (saudade) ---- */
+
+.rain-drop {
+  position: absolute;
+  width: 1px;
+  background: rgba(107, 154, 196, 0.25);
+  border-radius: 0 0 1px 1px;
+  animation: rain-fall linear infinite;
+}
+
+/* ---- Stars (sonhador) ---- */
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(197, 179, 227, 0.7);
+  animation: twinkle ease-in-out infinite;
+}
+
+/* ================================
+   ANIMATIONS
+   ================================ */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dice-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gradient-drift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 30px rgba(255, 46, 99, 0.3),
+      0 0 60px rgba(255, 46, 99, 0.15);
+  }
+  50% {
+    text-shadow: 0 0 40px rgba(255, 46, 99, 0.5),
+      0 0 80px rgba(255, 46, 99, 0.25);
+  }
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-10px) translateX(0);
+    opacity: 0;
+  }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% {
+    transform: translateY(100vh) translateX(-5px);
+    opacity: 0;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ---- Reduced motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .rain-drop,
+  .star {
+    display: none;
+  }
+
+  main {
+    opacity: 1;
+  }
+}
+
+/* ---- Desktop ---- */
+
+@media (min-width: 768px) {
+  main {
+    max-width: 600px;
+  }
+
+  .days-number {
+    font-size: 12rem;
+  }
+
+  .days-label {
+    font-size: 1rem;
+    letter-spacing: 0.35em;
+  }
+
+  .time-number {
+    font-size: 3.5rem;
+  }
+
+  .time-sep {
+    font-size: 2.75rem;
+  }
+
+  .time-label {
+    font-size: 0.75rem;
+  }
+
+  .time-unit {
+    min-width: 4.5rem;
+  }
+
+  .phrase-text {
+    font-size: 1.5rem;
+  }
+
+  .phrase-text.reunion {
+    font-size: 1.75rem;
+  }
+
+  .divider {
+    width: 50px;
+    margin: 2.5rem auto;
+  }
+
+  .dice svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* ---- Noscript ---- */
+
+noscript p {
+  font-family: system-ui, sans-serif;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: #666;
+}

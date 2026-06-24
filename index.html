@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quanto falta?</title>
+    <meta name="description" content="Contagem regressiva para o reencontro" />
+    <meta property="og:title" content="Quanto falta?" />
+    <meta
+      property="og:description"
+      content="Contagem regressiva para o reencontro"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2764;&#xFE0F;</text></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@1,400;1,500&family=Outfit:wght@200;300;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div id="ambient"></div>
+
+    <main>
+      <section class="countdown">
+        <div class="days">
+          <span class="days-number" id="dias">--</span>
+          <span class="days-label" id="dias-label">dias</span>
+        </div>
+        <div class="time">
+          <div class="time-unit">
+            <span class="time-number" id="horas">--</span>
+            <span class="time-label" id="horas-label">horas</span>
+          </div>
+          <span class="time-sep">:</span>
+          <div class="time-unit">
+            <span class="time-number" id="minutos">--</span>
+            <span class="time-label" id="minutos-label">minutos</span>
+          </div>
+          <span class="time-sep">:</span>
+          <div class="time-unit">
+            <span class="time-number" id="segundos">--</span>
+            <span class="time-label" id="segundos-label">segundos</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <section class="phrase-section" id="phrase-section">
+        <p class="phrase-text">
+          Até <span id="frase"></span>
+        </p>
+        <button class="dice" id="dice" aria-label="Sortear nova frase">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="3" />
+            <circle cx="8.5" cy="8.5" r="1" fill="currentColor" stroke="none" />
+            <circle cx="15.5" cy="8.5" r="1" fill="currentColor" stroke="none" />
+            <circle cx="8.5" cy="15.5" r="1" fill="currentColor" stroke="none" />
+            <circle cx="15.5" cy="15.5" r="1" fill="currentColor" stroke="none" />
+            <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" />
+          </svg>
+        </button>
+      </section>
+    </main>
+
+    <aside class="admin" id="admin">
+      <div class="admin-header">
+        <span class="admin-title">Tema</span>
+        <button class="admin-close" aria-label="Fechar painel">&#x2715;</button>
+      </div>
+      <div class="admin-themes">
+        <button class="admin-theme" data-theme="feliz">
+          <span class="admin-swatch" style="background: #E85D04"></span>
+          <span class="admin-label">Feliz</span>
+        </button>
+        <button class="admin-theme" data-theme="saudade">
+          <span class="admin-swatch" style="background: #6B9AC4"></span>
+          <span class="admin-label">Saudade</span>
+        </button>
+        <button class="admin-theme" data-theme="sonhador">
+          <span class="admin-swatch" style="background: #C5B3E3"></span>
+          <span class="admin-label">Sonhador</span>
+        </button>
+        <button class="admin-theme" data-theme="animado">
+          <span class="admin-swatch" style="background: #FF2E63"></span>
+          <span class="admin-label">Animado</span>
+        </button>
+        <button class="admin-theme" data-theme="romantico">
+          <span class="admin-swatch" style="background: #BE185D"></span>
+          <span class="admin-label">Romântico</span>
+        </button>
+        <button class="admin-theme" data-theme="sereno">
+          <span class="admin-swatch" style="background: #1B7A4A"></span>
+          <span class="admin-label">Sereno</span>
+        </button>
+        <button class="admin-theme" data-theme="nostalgico">
+          <span class="admin-swatch" style="background: #8B6914"></span>
+          <span class="admin-label">Nostálgico</span>
+        </button>
+      </div>
+      <button class="admin-auto">Automático</button>
+    </aside>
+
+    <button
+      class="admin-trigger"
+      id="admin-trigger"
+      aria-hidden="true"
+    ></button>
+
+    <noscript>
+      <p>Este site precisa de JavaScript para funcionar.</p>
+    </noscript>
+
+    <script src="data/frases.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
