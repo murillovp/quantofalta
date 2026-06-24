@@ -8,7 +8,7 @@ var FRASES = [
   "a gente conversar a noite toda",
   "a gente ir no Bambuzal",
   "a gente maratonar uma série",
-  "a gente pintar a parede da sala",
+  "a gente pintar a parede da sala de *outra* cor verde",
   "a gente tomar café no Maritaka",
   "eu ficar olhando o seu sorriso bobo",
   "você aguentar meus peidos",
@@ -16,4 +16,7 @@ var FRASES = [
   "você tirar o milho da carne moída",
   "eu parar de usar pimentão no frango",
   "a gente começar a vida juntos",
+  "a gente perder muito fluído corporal",
+  "a gente continuar de onde parou",
+  "você me entregar a aliança",
 ];
